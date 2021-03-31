@@ -6,7 +6,7 @@ class TextDrawer:
                         font_rgba = (255, 255, 255, 255),
                         outline_rgba = (0, 0, 0, 255),
                         outline_thickness = 3,
-                        font_path = "fonts/DiaryOfAn8BitMage-lYDD.ttf",
+                        font_path = "fonts/PressStart2P-vaV7.ttf",
                         font_size = 26,
                         line_width_char = 30,
                         line_spacing = 4
