@@ -3,16 +3,16 @@ from PIL import Image
 import skvideo.io
 import cv2
 import time
-
-time_start = time.time()
-
+import sys
 
 from FrameFeederGif import FrameFeederGif
 from LyricFileParser import LyricsParser
 from TextDrawer import TextDrawer
 
-# from ConfigDailyJourney import *
-from ConfigUnderwaterCity import *
+from config_dailyjourney import *
+# from config_underwatercity import *
+
+time_start = time.time()
 
 frame_feeder = FrameFeederGif(gif_path, scale = frame_feeder_scale, speed = frame_feeder_speed)
 lyrics = LyricsParser(lyrics_path)
@@ -34,7 +34,8 @@ writer = skvideo.io.FFmpegWriter(output_video_path, inputdict={
 })
 
 while current_time <= audio_length:
-    print("Frame:", current_frame)
+    print("Frame:" + str(current_frame))
+
     frame = frame_feeder.pop_frame()
     text_drawer.canvas_size = frame.size
     text_drawer.figure_out_bounding_box(lyrics.lines_list, y0=text_drawer.canvas_size[1]*global_y_offset_ratio)
@@ -47,6 +48,8 @@ while current_time <= audio_length:
 
         img_composite = Image.alpha_composite(img_composite, img_text_mask)
         print(lyric_line)
+
+    sys.stdout.flush()
 
     if upscale != 1:
         img_composite = img_composite.resize((img_composite.size[0]*upscale, img_composite.size[1]*upscale), Image.NEAREST)
@@ -65,10 +68,11 @@ while current_time <= audio_length:
 writer.close()
 del writer
 
+print(f'Silent video saved to {output_video_path}')
+
+print(f'Adding audio: {output_video_path} + {audio_path} = {output_video_path_music}')
 # Add audio
-
 import subprocess
-
 cmd = 'ffmpeg -y -i "{}" -i "{}" -c:v copy -c:a aac -b:a 192k "{}"'.format(output_video_path, audio_path, output_video_path_music)
 subprocess.run(cmd)
 

@@ -1,12 +1,9 @@
 <b>A little program for making pixel art lyric videos.</b>
 
-I wrote this project to make 8bit lyric videos for my music project <i>Flying Salmon</i>. 
-
-Then, some people were curious to see the source code and asked me to share it.
-
-Well, here it is! The code is a bit messy and not very user-friendly for customization, because I didn't expect anyone to ever see it. I'll try to make it better if I see you guys' interest in this project! 
-
-Here's an example what you can make:
+I wrote this project to make 8bit lyric videos for my music project <i>Flying Salmon</i>.
+ 
+Then, some people were curious to see the source code and asked me to share it. Well, here it is! The code is a bit messy and not very user-friendly for customization, because I didn't expect anyone to ever see it. 
+Here's an example of what you can make:
  
 https://youtu.be/uMxgx-nJi9o
 
@@ -17,21 +14,20 @@ So basically a program takes:
 
 and combines it into a pixel perfect aesthetic lyric video.
 
-Tested on python 3.8.0. 
+
 
 Requirements:
 1) ```ffmpeg``` (https://www.ffmpeg.org)
-2) ```pip3 install numpy pillow sk-video opencv-python```
+2) ```pip3 install numpy pillow sk-video opencv-python``` (or simply ```pip3 install -r requirements.txt```)
+
+Running:
+1) ```setup.py``` - downloads data
+2) ```main.py``` - creates a lyric video.
 
 
-Before you run the code, you should download this archive and unpack it to the ```data``` folder: http://bit.ly/lyricvideocreator_data
+To configure it, you should create a configuration file (see ```config_dailyjourney.py``` or ```config_underwatercity.py``` as an example) and specify it in ```main.py``` as follows:
 
-
-To create a lyric video, run ```LyricVideoCreator.py```.
-
-To configure it, you should create a configuration file (see ```ConfigDailyJourney.py``` or ```ConfigUnderwaterCity.py``` as an example) and specify it in ```LyricVideoCreator.py``` as follows:
-
-```from ConfigUnderwaterCity import *```
+```from config_dailyjourney import *```
 
 Enjoy! 
 

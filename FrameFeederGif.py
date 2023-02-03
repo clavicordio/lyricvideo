@@ -21,7 +21,6 @@ class FrameFeederGif:
         else:
             self.frame = self.gif_capture.resize((int(width * self.scale), int(height * self.scale)), Image.NEAREST). \
                 convert("RGB").convert("RGBA")
-
         try:
             self.gif_capture.seek(self.gif_capture.tell()+1)
         except EOFError:
@@ -40,19 +39,17 @@ class FrameFeederGif:
             if self.frame_id < int(self.new_video_frame_id):
                 # capture frame
                 self.read_frame()
-
                 continue
 
             if self.frame_id == int(self.new_video_frame_id):
                 self.read_frame()
-
                 self.new_video_frame_id += self.speed
                 return self.frame
 
             if self.frame_id > int(self.new_video_frame_id):
-
                 self.new_video_frame_id += self.speed
                 return self.frame
+
 
 if __name__ == "__main__":
     frame_reader = FrameFeederGif("data\Coast_sunset.gif", speed=1)
